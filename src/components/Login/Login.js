@@ -2,6 +2,7 @@ import React, { useContext, useReducer } from 'react';
 import AuthContext from '../store/auth-context';
 import Button from '../UI/Button/Button';
 import Card from '../UI/Card/Card';
+import Input from '../UI/Input/Input';
 import classes from './Login.module.css';
 
 const emailReducer = (state, action) => {
@@ -52,32 +53,22 @@ const Login = () => {
   return (
     <Card className={classes.login}>
       <form onSubmit={submitHandler}>
-        <div
-          className={`${classes.control} ${
-            isEmailValid === false ? classes.invalid : ''
-          }`}
-        >
-          <label htmlFor="email">E-Mail</label>
-          <input
-            type="email"
-            id="email"
-            value={formInput.email}
-            onChange={emailChangeHandler}
-          />
-        </div>
-        <div
-          className={`${classes.control} ${
-            isPasswordValid === false ? classes.invalid : ''
-          }`}
-        >
-          <label htmlFor="password">Password</label>
-          <input
-            type="password"
-            id="password"
-            value={formInput.password}
-            onChange={passwordChangeHandler}
-          />
-        </div>
+        <Input
+          type="email"
+          id="email"
+          label="Email"
+          value={formInput.email}
+          isValid={isEmailValid}
+          onChange={emailChangeHandler}
+        />
+        <Input
+          type="password"
+          id="password"
+          label="Password"
+          value={formInput.password}
+          isValid={isPasswordValid}
+          onChange={passwordChangeHandler}
+        />
         <div className={classes.actions}>
           <Button type="submit" className={classes.btn} disabled={!isFormValid}>
             Login
